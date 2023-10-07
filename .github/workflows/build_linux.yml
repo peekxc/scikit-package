@@ -36,7 +36,7 @@ jobs:
     - name: Test with pytest
       run: |
         python -m pytest tests/ --cov=primate --benchmark-skip
-        coverage run --source=./primate -m pytest tests/ --benchmark-skip
+        coverage run -m pytest tests/ --benchmark-skip
         coverage json -o tests/test_results.json
         coverage report -m
     - if: matrix.os == 'ubuntu-latest'

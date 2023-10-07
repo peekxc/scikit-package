@@ -13,7 +13,7 @@ classifiers = [
 	"Programming Language :: Python :: 3"
 ]
 authors = [
-	{ name = "Matt Piekenbrock", email = "matt.piekenbrock@gmail.com" }
+	{ name = "Your Name", email = "my.email@email.com" }
 ]
 requires-python = ">=3.8"
 dependencies = [

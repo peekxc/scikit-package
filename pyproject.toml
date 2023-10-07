@@ -1,0 +1,29 @@
+[build-system]
+build-backend = 'mesonpy'
+requires = ['meson-python', 'wheel', 'ninja', 'pybind11', 'numpy']
+
+[project]
+name = "my_package"
+version = '0.0.1'
+readme = "README.md"
+classifiers = [
+	"Intended Audience :: Science/Research",
+	"Development Status :: 3 - Alpha",
+	"License :: OSI Approved :: Apache Software License",
+	"Programming Language :: Python :: 3"
+]
+authors = [
+	{ name = "Matt Piekenbrock", email = "matt.piekenbrock@gmail.com" }
+]
+requires-python = ">=3.8"
+dependencies = [
+  "numpy"
+]
+license = {file = "LICENSE"}
+include = [
+	{ path = "my_package/**/*.so", format = "wheel" },
+	{ path = "my_package/**/*.pyd", format = "wheel" },
+]
+
+[tool.meson-python.args]
+setup = ['--default-library=static']

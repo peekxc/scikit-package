@@ -1,1 +1,0 @@
-# option('hehyy_cpp_std_', type : 'string', value : 'c++17', description : 'Default C++ standard')

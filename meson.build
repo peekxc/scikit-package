@@ -1,5 +1,6 @@
 project(
-  'my_package', 'cpp', 
+  'skpackage', 'cpp', 
+  version: run_command(['src/skpackage/__version__.py'], check: true).stdout().strip(),
   license: 'Apache-2.0',
   meson_version: '>= 1.2.0',
   default_options : [
@@ -10,6 +11,7 @@ project(
     'python.bytecompile=2'
   ]
 )
+pkg_name = meson.project_name()
 
 ## Import python kernel 
 py_mod = import('python')
@@ -32,7 +34,7 @@ _cpp_args = compiler.get_supported_arguments(
   '-Wno-misleading-indentation',
   '-fPIC', 
   '-fvisibility=hidden',
-  '-Wno-deprecated-anon-enum-enum-conversion' # to silence Eigen 3.4 warnings
+  '-Wno-deprecated-anon-enum-enum-conversion'
 )
 
 ## Include directories
@@ -41,6 +43,7 @@ incdir_pybind11 = run_command(py, ['-c', 'import os; os.chdir(".."); import pybi
 
 ## Header includes
 inc_pkg = include_directories('include')
+inc_extern = include_directories('extern')
 inc_numpy = include_directories(incdir_numpy)
 inc_pybind11 = include_directories(incdir_pybind11)
 
@@ -48,4 +51,4 @@ inc_pybind11 = include_directories(incdir_pybind11)
 dependency_map = {}
 
 ## Compile the package directory
-subdir('src' / 'my_package')
+subdir('src' / pkg_name)

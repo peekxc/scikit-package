@@ -56,7 +56,7 @@ jobs:
     - name: Install the wheel
       run: | 
         echo $env:GITHUB_WORKSPACE
-        dir /s $env:GITHUB_WORKSPACE
+        dir $env:GITHUB_WORKSPACE
         python -m pip install --verbose $env:GITHUB_WORKSPACE\dist\*.whl
     - name: Wheel dry-run 
       run: | 

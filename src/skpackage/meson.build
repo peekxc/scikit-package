@@ -4,7 +4,7 @@ foreach ext: extensions
   py.extension_module(
     ext,
     ext + '.cpp',
-    include_directories: [inc_pkg, inc_extern, inc_numpy, inc_pybind11],
+    include_directories: includes,
     install: true, 
     cpp_args: _cpp_args
   )

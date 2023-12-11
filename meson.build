@@ -12,6 +12,7 @@ project(
   ]
 )
 pkg_name = meson.project_name()
+includes = []
 
 ## Import python kernel 
 py_mod = import('python')
@@ -42,13 +43,15 @@ incdir_numpy = run_command(py, ['-c', 'import os; os.chdir(".."); import numpy; 
 incdir_pybind11 = run_command(py, ['-c', 'import os; os.chdir(".."); import pybind11; print(pybind11.get_include())'], check : true).stdout().strip()
 
 ## Header includes
-inc_pkg = include_directories('include')
-inc_extern = include_directories('extern')
-inc_numpy = include_directories(incdir_numpy)
-inc_pybind11 = include_directories(incdir_pybind11)
+includes += include_directories('include')
+includes += include_directories(incdir_numpy)
+includes += include_directories(incdir_pybind11)
 
-## Add dependencies, if any
-dependency_map = {}
+fs = import('fs')
+if fs.is_dir('extern')
+  includes += include_directories('extern')
+endif
+
 
 ## Compile the package directory
 subdir('src' / pkg_name)

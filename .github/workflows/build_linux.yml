@@ -22,6 +22,9 @@ jobs:
       uses: actions/checkout@v3
       with: 
         submodules: true
+    - name: Set env 
+      run: |
+        echo "{name}={value}" >> $GITHUB_ENV
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v4
       with:
@@ -39,7 +42,7 @@ jobs:
         coverage report -m
     - name: Uninstall the package
       run: |
-        python -m pip uninstall --verbose skpackage
+        python -m pip uninstall --verbose -y skpackage
     - name: Build a wheel
       run: |
         python -m pip wheel . --no-deps --wheel-dir $GITHUB_WORKSPACE/dist 

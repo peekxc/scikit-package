@@ -37,6 +37,9 @@ jobs:
       run: |
         python -m pytest tests/ --cov=skpackage --benchmark-skip
         coverage report -m
+    - name: Uninstall the package
+      run: |
+        python -m pip uninstall --verbose -y skpackage
     - name: Build a wheel
       run: |
         python -m pip wheel . --no-deps --wheel-dir $GITHUB_WORKSPACE/dist 

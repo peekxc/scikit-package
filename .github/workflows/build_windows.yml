@@ -11,6 +11,7 @@ jobs:
     name: ${{ matrix.os }} - Python ${{ matrix.python-version }}
     runs-on: ${{ matrix.os }}
     env:
+      PKG_NAME: skpackage
       CC: clang-cl
       CXX: clang-cl
       LDFLAGS: "-Wl,-S"
@@ -44,5 +45,5 @@ jobs:
         python -m pip install --verbose .
     - name: Test with pytest
       run: |
-        python -m pytest tests/ --benchmark-skip
+        python -m pytest tests/ --cov=skpackage --benchmark-skip
         coverage report -m

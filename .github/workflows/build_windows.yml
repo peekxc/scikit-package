@@ -52,12 +52,16 @@ jobs:
         python -m pip uninstall --verbose -y skpackage
     - name: Build a wheel
       run: |
-        python -m pip wheel . --no-deps --verbose --wheel-dir $env:GITHUB_WORKSPACE\dist 
+        python -m pip wheel . --no-deps --verbose --wheel-dir dist 
+      working-directory: 
+        $env:GITHUB_WORKSPACE
     - name: Install the wheel
       run: | 
         echo $env:GITHUB_WORKSPACE
-        dir $env:GITHUB_WORKSPACE
-        python -m pip install --verbose $env:GITHUB_WORKSPACE\dist\*.whl
+        dir dist
+        python -m pip install --verbose dist\*.whl
+      working-directory: 
+        $env:GITHUB_WORKSPACE
     - name: Wheel dry-run 
       run: | 
         python -c "import skpackage; print(skpackage.__version__)"

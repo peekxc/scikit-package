@@ -58,6 +58,13 @@ jobs:
         echo $env:GITHUB_WORKSPACE
         dir dist
         $env:wheel_name=Get-ChildItem -Path dist/* -Include *.whl
+    - name: Powershell command
+      run: |
+        Get-ChildItem -Path dist/* -Include *.whl
+    - name: Try running bash since windows is horrendous
+      run: |
+        ls -a dist
+      shell: bash 
     - name: Echo wheel
       run: | 
         echo $env:wheel_name

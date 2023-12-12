@@ -57,11 +57,17 @@ jobs:
       run: | 
         echo $env:GITHUB_WORKSPACE
         dir dist
-        python -m pip install --verbose dist\*.whl
+    - name: Install the wheel 
+      run: |
+        chdir dist
+        for %%w in (*.whl) do python -m pip install --verbose %%w
     - name: Wheel dry-run 
       run: | 
+        chdir ..
         python -c "import skpackage; print(skpackage.__version__)"
     - name: Test the wheel 
       run: |
         python -m pytest tests/ --cov=skpackage --benchmark-skip
         coverage report -m
+
+# python -m pip install --verbose dist\*.whl
